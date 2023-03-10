@@ -16,4 +16,4 @@ class News(models.Model):
     title = models.CharField(max_length=20)
     text = models.CharField(max_length=200)
     author = models.ForeignKey(NewsUser, null=True, on_delete=models.SET_NULL)
-    tags = models.ManyToManyField(NewsTag, null=True)
+    tags = models.ManyToManyField(NewsTag, blank=True)
