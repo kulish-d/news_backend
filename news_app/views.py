@@ -3,12 +3,12 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 
-from news_app.models import NewsUser, NewsTag, News
-from news_app.serializers import NewsTagSerializer, NewsSerializer
+from news_app.models import User, Post, Tag
+from news_app.serializers import TagSerializer, PostSerializer
 from news.settings import NEWS_ON_PAGE
 
 
-class NewsViewSet(viewsets.ModelViewSet):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from news_app.models import NewsUser, NewsTag, News
+from news_app.models import Post, Tag
 
 
-admin.site.register([NewsTag, News])
+admin.site.register([Post, Tag])
