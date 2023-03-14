@@ -29,6 +29,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://t3.academy.dunice-testing.com",
 ]
 
+AUTH_USER_MODEL = 'news_app.User'
+
 # Application definition
 
 INSTALLED_APPS = [

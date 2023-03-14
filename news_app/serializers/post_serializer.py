@@ -1,12 +1,7 @@
 from rest_framework import serializers
 
-from news_app.models import User, Post, Tag
-
-
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = '__all__'
+from news_app.models import Post
+from news_app.serializers.tag_serializer import TagSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):

@@ -1,0 +1,1 @@
+from news_app.views.post_view import PostViewSet
