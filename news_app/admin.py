@@ -4,10 +4,9 @@ from django.contrib.auth.admin import UserAdmin
 from news_app.models import User, Post, Tag
 
 
-class MyUserAdmin(UserAdmin):
-    ordering = ['id']
-    list_display=['username','email']
+# class MyUserAdmin(UserAdmin):
+#     ordering = ['id']
+#     list_display=['email']
 
-
-admin.site.register(User, MyUserAdmin)
+admin.site.register(User)
 admin.site.register([Post, Tag])
