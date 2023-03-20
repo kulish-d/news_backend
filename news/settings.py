@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+from datetime import timedelta
+
 
 load_dotenv()
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'news_app',
     'rest_framework',
     'corsheaders',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +91,26 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', 
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+
+SIMPLE_JWT = {
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
+   'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
 
 
 # Password validation
