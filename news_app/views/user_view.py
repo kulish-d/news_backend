@@ -3,7 +3,6 @@ from news_app.serializers import UserSerializer
 from rest_framework.response import Response
 
 
-
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
