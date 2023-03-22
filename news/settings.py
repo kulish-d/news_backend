@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'news_app',
     'rest_framework',
     'corsheaders',
-    'djoser',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
