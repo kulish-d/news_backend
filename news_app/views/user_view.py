@@ -10,8 +10,9 @@ class RegisterView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    
+
+class UserView(APIView):
     def get(self, request):
-        user_id = request.GET.get('id')
-        user = User.objects.get(id=user_id)
-        return Response({'user': user.username})
+        return Response({'user_id': request.user.id,
+                          'username': request.user.username,
+                            'user_email': request.user.email})
