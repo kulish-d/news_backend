@@ -2,10 +2,10 @@ from rest_framework import serializers
 
 from news_app.models import Post, Tag
 from news_app.serializers.tag_serializer import TagSerializer
-
+from news_app.serializers.user_serializer import UserSerializer
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(many=False)
+    author = UserSerializer()
     tags = TagSerializer(many=True)
     class Meta:
         model = Post

@@ -17,6 +17,10 @@ class UserView(APIView):
     def get(self, request):
         return Response({'user_id': request.user.id,
                           'username': request.user.username,
-                            'user_email': request.user.email,
-                            'user_posts': [Post.objects.filter(author=request.user).values_list()],
+                            'user_email': request.user.email
                             })
+
+class PeopleView(APIView):
+    def get(self, request):
+        post_id = request.GET.get('post_id')
+        return Response()
