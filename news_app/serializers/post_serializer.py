@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from news_app.models import Post
+from news_app.models import Post, Tag
 from news_app.serializers.tag_serializer import TagSerializer
 
 
@@ -10,3 +10,13 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+
+    def create(self, validated_data):
+        tags_data = validated_data.pop('tags')
+        post = Post.objects.create(**validated_data)
+
+        for tag in tags_data:
+            Tag.objects.create(post=post, **tag)
+
+        return post
