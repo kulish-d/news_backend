@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from news_app.serializers import UserSerializer, PostSerializer
-from news_app.models import Post
+from news_app.models import Post, User
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
@@ -22,5 +22,6 @@ class UserView(APIView):
 
 class PeopleView(APIView):
     def get(self, request):
-        post_id = request.GET.get('post_id')
-        return Response()
+        user_id = request.GET.get('id')
+        user = User.objects.get(id=user_id)
+        return Response({'user_name': str(user), 'user_email': user.email})
