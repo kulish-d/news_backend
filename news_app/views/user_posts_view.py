@@ -9,5 +9,4 @@ class UserPostsView(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.kwargs.get('user_id')
         queryset = Post.objects.filter(author=user_id)
-        print(queryset)
         return queryset.order_by('-id')
