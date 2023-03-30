@@ -17,5 +17,5 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
 
     def perform_create(self, serializer):
-        serializer.save(author_id=self.request.user.id)
+        serializer.save(author=self.request.user)
         

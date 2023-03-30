@@ -1,7 +1,7 @@
-from django.db.models.fields import CharField
 from rest_framework import serializers
 
 from news_app.models import User
+
 
 
 class UserSerializer(serializers.ModelSerializer):
