@@ -1,9 +1,8 @@
+from django.core import serializers
 from rest_framework.views import APIView
 from news_app.serializers import UserSerializer, PostSerializer
-from news_app.models import Post
+from news_app.models import Post, User
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 
 
 class RegisterView(APIView):
@@ -17,6 +16,12 @@ class UserView(APIView):
     def get(self, request):
         return Response({'user_id': request.user.id,
                           'username': request.user.username,
-                            'user_email': request.user.email,
-                            'user_posts': [Post.objects.filter(author=request.user).values_list()],
+                            'user_email': request.user.email
                             })
+
+class PeopleView(APIView):
+    def get(self, request):
+        user_id = request.GET.get('id')
+        user = User.objects.get(id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
