@@ -13,10 +13,11 @@ class PostSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        tags_data = validated_data.pop('tags')
+        post_tags = []
+        for tag in validated_data.pop('tags'):
+            post_tags.append(Tag.objects.get_or_create(text=tag.get('text'))[0])
+                  
         post = Post.objects.create(**validated_data)
 
-        for tag in tags_data:
-            Tag.objects.create(post=post, **tag)
-
+        post.tags.set(post_tags)
         return post
