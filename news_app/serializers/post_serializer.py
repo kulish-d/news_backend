@@ -13,7 +13,6 @@ class PostSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        print(self, validated_data)
         tags_data = validated_data.pop('tags')
         post = Post.objects.create(**validated_data)
 
