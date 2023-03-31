@@ -5,7 +5,7 @@ from news_app.serializers.tag_serializer import TagSerializer
 from news_app.serializers.user_serializer import UserSerializer
 
 class PostSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
+    author = UserSerializer(read_only=True)
     tags = TagSerializer(many=True)
     class Meta:
         model = Post
@@ -13,6 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
+        print(self, validated_data)
         tags_data = validated_data.pop('tags')
         post = Post.objects.create(**validated_data)
 
