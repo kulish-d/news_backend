@@ -12,6 +12,18 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    def create(self, request):
+        good_data = request.data.dict()
+        print(good_data)
+        good_data['tags'] = list(good_data['tags'])
+        print(good_data)
+        serializer = self.get_serializer(data=good_data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
         
