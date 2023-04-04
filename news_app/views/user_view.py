@@ -12,12 +12,14 @@ class RegisterView(APIView):
         serializer.save()
         return Response(serializer.data)
 
+
 class UserView(APIView):
     def get(self, request):
         return Response({'user_id': request.user.id,
-                          'username': request.user.username,
-                            'user_email': request.user.email
-                            })
+                         'username': request.user.username,
+                         'user_email': request.user.email
+                         })
+
 
 class PeopleView(APIView):
     def get(self, request):
