@@ -7,7 +7,7 @@ from news_app.models.managers import CustomUserManager
 class User(AbstractUser):
     username = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, unique=True)
-    avatar = models.ImageField(upload_to='img/users/', default='img/default_user.png')
+    avatar = models.ImageField(upload_to='img/users/', default='img/users/default_user.png')
 
     date_joined = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)

@@ -1,9 +1,10 @@
 from django.core import serializers
 from rest_framework.views import APIView
-from news_app.serializers import UserSerializer, PostSerializer
-from news_app.models import Post, User
 from rest_framework.response import Response
 
+from news_app.serializers import UserSerializer, PostSerializer
+from news_app.models import Post, User
+from news.settings import MEDIA_URL
 
 class RegisterView(APIView):
     def post(self, request):
@@ -17,7 +18,8 @@ class UserView(APIView):
     def get(self, request):
         return Response({'user_id': request.user.id,
                          'username': request.user.username,
-                         'user_email': request.user.email
+                         'user_email': request.user.email,
+                         'user_avatar': f'{MEDIA_URL}{str(request.user.avatar)}',
                          })
 
 
