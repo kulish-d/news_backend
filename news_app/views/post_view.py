@@ -17,9 +17,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def create(self, request):
         good_data = request.data.dict()
         good_data['tags'] = json.loads(good_data['tags'])
-        print(good_data['tags'])
         good_data['tags'] = list(map(lambda tag: {'text': tag}, good_data['tags']))
-        print(good_data)
         serializer = self.get_serializer(data=good_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
