@@ -1,4 +1,5 @@
 from django.core import serializers
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -22,6 +23,15 @@ class UserView(APIView):
                          'user_avatar': f'{MEDIA_URL}{str(request.user.avatar)}',
                          })
 
+    def patch(self, request):
+        user = User.objects.get(id=request.user.id)
+        # print(request.data)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class PeopleView(APIView):
     def get(self, request):
