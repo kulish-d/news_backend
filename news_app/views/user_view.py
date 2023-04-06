@@ -28,4 +28,6 @@ class PeopleView(APIView):
         user_id = request.GET.get('id')
         user = User.objects.get(id=user_id)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        returned_data = serializer.data
+        del returned_data['password']
+        return Response(returned_data)
