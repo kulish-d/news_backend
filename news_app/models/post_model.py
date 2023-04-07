@@ -8,4 +8,4 @@ class Post(models.Model):
     text = models.CharField(max_length=200)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag, blank=True)
-    image = models.ImageField(upload_to='img/', default='img/default_user.png')
+    image = models.ImageField(upload_to='img/posts/', default='img/posts/default_post.png')

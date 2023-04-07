@@ -6,12 +6,21 @@ from news_app.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'password')
+        fields = ('id', 'email', 'username', 'password', 'avatar')
+        extra_kwargs = {
+            'password': { 'write_only':'True' }
+        }
 
     def create(self, validated_data):
-        user = User.objects.create(email=validated_data['email'],
-                                   username=validated_data['username']
-                                   )
-        user.set_password(validated_data['password'])
+        password = validated_data.pop('password')
+        user = User.objects.create(**validated_data)
+        user.set_password(password)
         user.save()
         return user
+
+    def update(self, instance, data):
+        instance.username = data.get('username', instance.username)
+        instance.email = data.get('email', instance.email)
+        instance.avatar = data.get('avatar', instance.avatar)
+        instance.save()
+        return instance
