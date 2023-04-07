@@ -17,27 +17,21 @@ class RegisterView(APIView):
 
 class UserView(APIView):
     def get(self, request):
-        return Response({'user_id': request.user.id,
-                         'username': request.user.username,
-                         'user_email': request.user.email,
-                         'user_avatar': f'{MEDIA_URL}{str(request.user.avatar)}',
-                         })
+        user = User.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
     def patch(self, request):
         user = User.objects.get(id=request.user.id)
-        # print(request.data)
         serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PeopleView(APIView):
     def get(self, request):
         user_id = request.GET.get('id')
         user = User.objects.get(id=user_id)
         serializer = UserSerializer(user)
-        returned_data = serializer.data
-        del returned_data['password']
-        return Response(returned_data)
+        return Response(serializer.data)
