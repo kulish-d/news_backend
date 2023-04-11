@@ -7,6 +7,14 @@ from news_app.serializers import UserSerializer, PostSerializer
 from news_app.models import Post, User
 from news.settings import MEDIA_URL
 
+
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
