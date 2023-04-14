@@ -9,11 +9,14 @@ from news.settings import MEDIA_URL
 
 
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
 
 
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
+    client_class = OAuth2Client
+    callback_url = 'http://localhost:8080/callback/'
 
 class RegisterView(APIView):
     def post(self, request):
