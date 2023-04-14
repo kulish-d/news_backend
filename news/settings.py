@@ -140,6 +140,7 @@ SIMPLE_JWT = {
 
 
 SITE_ID=1
+
 REST_USE_JWT = True 
 
 REST_AUTH = {
@@ -153,8 +154,12 @@ SOCIALACCOUNT_PROVIDERS = {
             'profile',
             'email',
         ],
+        # "APP": {
+        #      "client_id": '835577436200-k597mf3e1ohq9eu3p7cnf2rcfhchapdk.apps.googleusercontent.com',
+        #      "secret": "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"
+        # },
         'AUTH_PARAMS': {
-            'access_type': 'offline',
+            'access_type': 'offilne',
         }
     }
 }
