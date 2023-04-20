@@ -1,3 +1,4 @@
 from news_app.serializers.post_serializer import PostSerializer
 from news_app.serializers.tag_serializer import TagSerializer
 from news_app.serializers.user_serializer import UserSerializer
+from news_app.serializers.comment_serializer import CommentSerializer
