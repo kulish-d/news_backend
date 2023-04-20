@@ -21,3 +21,14 @@ class PostSerializer(serializers.ModelSerializer):
 
         post.tags.set(post_tags)
         return post
+    
+    def update(self, instance, data):
+        post_tags = []
+        for tag in data.pop('tags'):
+            post_tags.append(Tag.objects.get_or_create(text=tag.get('text'))[0])
+        instance.title = data.get('title', instance.title)
+        instance.text = data.get('text', instance.text)
+        instance.tags.set(post_tags)
+        instance.image = data.get('image', instance.image)
+        instance.save()
+        return instance

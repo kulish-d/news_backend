@@ -24,6 +24,18 @@ class PostViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+    def update(self, request, pk, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        good_data = request.data.dict()
+        good_data['tags'] = json.loads(good_data['tags'])
+        good_data['tags'] = list(map(lambda tag: {'text': tag}, good_data['tags']))
+        serializer = self.get_serializer(instance, data=good_data, partial=partial)
+        if serializer.is_valid():
+            serializer.save(author=self.request.user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-        
