@@ -9,7 +9,6 @@ from rest_framework_simplejwt.views import (
 
 from news_app.views import RegisterView, UserView, PeopleView, UserPostsView
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('me/', UserView.as_view(), name='get_me'),
@@ -23,4 +22,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
-                            document_root=settings.MEDIA_ROOT)
+                          document_root=settings.MEDIA_ROOT)

@@ -12,13 +12,13 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        print(instance)
-        comments = Comment.objects.filter(post=instance)
-        print(comments)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    # def retrieve(self, request, *args, **kwargs):
+    #     instance = self.get_object()
+    #     print(instance)
+    #     comments = Comment.objects.filter(post=instance)
+    #     print(comments)
+    #     serializer = self.get_serializer(instance)
+    #     return Response(serializer.data)
 
     def create(self, request):
         good_data = request.data.dict()
