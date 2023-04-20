@@ -23,11 +23,9 @@ class PostSerializer(serializers.ModelSerializer):
         return post
     
     def update(self, instance, data):
-        print('in serial', instance, data)
         post_tags = []
         for tag in data.pop('tags'):
             post_tags.append(Tag.objects.get_or_create(text=tag.get('text'))[0])
-        print(post_tags)
         instance.title = data.get('title', instance.title)
         instance.text = data.get('text', instance.text)
         instance.tags.set(post_tags)
