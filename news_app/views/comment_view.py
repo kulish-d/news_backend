@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 from news_app.models import Comment, User
 from news_app.serializers import CommentSerializer
@@ -18,8 +18,13 @@ class CommentViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-class CommentView(APIView):
-    def get(self, request):
-        comments = Comment.objects.get(post=request.GET.get('post'))
-        serializer = CommentSerializer(data=comments)
-        return Response(serializer.data)
+# class CommentView(ListAPIView):
+#     def get(self, request):
+#         comments = Comment.objects.filter(post=request.GET.get('post'))
+#         res_com = []
+#         for comment in comments:
+#             serializer = CommentSerializer(data=comments)
+#             serializer.is_valid(raise_exception=True)
+#             res_com.append(serializer.data)
+#         print(res_com)
+#         return Response(serializer.data)
